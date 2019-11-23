@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+
+        <TextView
+            android:id="@+id/sname_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"/>
+
+        <TextView
+            android:id="@+id/name_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_below="@id/sname_text"/>
+            <Button
+                android:id="@+id/addButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="시간표에 추가"
+                android:textSize="20dp"
+                android:visibility="visible"
+                android:layout_marginTop="40dp"
+                android:onClick="onClick"
+                android:layout_alignParentRight="true" />
+
+    <TextView
+        android:id="@+id/day1_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:layout_below="@id/name_text"/>
+
+    <TextView
+        android:id="@+id/day2_text"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="15dp"
+    android:layout_below="@id/day1_text"/>
+
+
+        <TextView
+            android:id="@+id/start1_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:layout_marginLeft="5dp"
+            android:layout_alignBaseline="@id/day1_text"
+            android:layout_toRightOf="@id/day1_text"/>
+        <TextView
+            android:id="@+id/finish1_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_alignBaseline="@id/day1_text"
+            android:layout_toRightOf="@id/start1_text"/>
+
+    <TextView
+        android:id="@+id/start2_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:layout_marginLeft="5dp"
+        android:layout_alignBaseline="@id/day2_text"
+        android:layout_toRightOf="@id/day2_text"/>
+    <TextView
+        android:id="@+id/finish2_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:layout_alignBaseline="@id/day2_text"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/start2_text"/>
+
+</RelativeLayout>
