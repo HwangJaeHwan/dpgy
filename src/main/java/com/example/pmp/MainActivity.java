@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,11 +22,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity  implements BaseAdapterEx.OnClickEvent {
 
     private static final String DATABASE_NAME = "SubjectDB.db";
     private static final String PACKAGE_DIR = "/data/data/com.example.pmp/databases";
-    private static final String MYFILENAME = "fuck";
+    private static final String MYFILENAME = "test";
+
+    FrameLayout root;
 
     ListView mListView = null;
     BaseAdapterEx mAdapter = null;
@@ -60,8 +63,6 @@ public class MainActivity extends AppCompatActivity  {
     }
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,15 +72,12 @@ public class MainActivity extends AppCompatActivity  {
         editSearch = (EditText)findViewById(R.id.edit);
         mData = new ArrayList<Subject>();
         mDataShow = new ArrayList<Subject>();
-        FrameLayout root = (FrameLayout) findViewById(R.id.Root);
-        Button bt3 = new Button(this);
-        FrameLayout.LayoutParams bt3LP = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,FrameLayout.LayoutParams.WRAP_CONTENT);
-        bt3.setText("Button 3");
 
-        root.addView(bt3,bt3LP);
+
+
 
         SQLiteDatabase db = SQLiteDatabase.openDatabase(PACKAGE_DIR + "/" +MYFILENAME, null, SQLiteDatabase.OPEN_READONLY);
-        Cursor cursor = db.rawQuery("select S_NAME,NAME,TIME from fuck",null);
+        Cursor cursor = db.rawQuery("select S_NAME,NAME,TIME,Day1,Day2,Day3,Day4,C_Shour,C_Smin,C_Fhour,C_Fmin,Shour1,Smin1,Fhour1,Fmin1,Shour2,Smin2,Fhour2,Fmin2 from DataTable",null);
 
         while (cursor.moveToNext()) {
             Subject subject = new Subject();
@@ -90,6 +88,24 @@ public class MainActivity extends AppCompatActivity  {
             subject.mSname = cursor.getString(0);
             subject.mName = cursor.getString(1);
             subject.mTime = temp;
+            subject.mDay1 = cursor.getString(3);
+            subject.mDay2 = cursor.getString(4);
+            subject.mDay3 = cursor.getString(5);
+            subject.mDay4 = cursor.getString(6);
+            subject.mCshour = cursor.getInt(7);
+            subject.mCsmin = cursor.getInt(8);
+            subject.mCfhour = cursor.getInt(9);
+            subject.mCfmin = cursor.getInt(10);
+            subject.mShour1 = cursor.getInt(11);
+            subject.mSmin1 = cursor.getInt(12);
+            subject.mFhour1 = cursor.getInt(13);
+            subject.mFmin1 = cursor.getInt(14);
+            subject.mShour2 = cursor.getInt(15);
+            subject.mSmin2 = cursor.getInt(16);
+            subject.mFhour2 = cursor.getInt(17);
+            subject.mFmin2 = cursor.getInt(18);
+
+
 
             mData.add(subject);
         }
@@ -149,6 +165,20 @@ public class MainActivity extends AppCompatActivity  {
     }
 
 
+    @Override
+    public void onClick(Subject subject) {
+        Log.d("hi", subject.getmName());
+        String test = subject.getmSname()+"\n"+subject.getmName();
+        root  = (FrameLayout)findViewById(R.id.Root);
+        Button bt1 = new Button(this);
+        Sublist test1 = new Sublist(this,subject);
+        bt1.setText(test);
+        FrameLayout.LayoutParams bt1LP = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT,FrameLayout.LayoutParams.WRAP_CONTENT);
+        bt1LP.topMargin=subject.mShour1*10;
+        root.addView(test1,bt1LP);
+        //root.addView(bt1,bt1LP);
+
+    }
 }
 
 

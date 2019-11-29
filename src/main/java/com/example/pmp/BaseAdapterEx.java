@@ -16,10 +16,11 @@ public class BaseAdapterEx extends BaseAdapter {
     ArrayList<Subject> mData = null;
     ArrayList<Subject> mDataShow = null;
     LayoutInflater mLayoutInflater = null;
+    private OnClickEvent handler;
 
     public BaseAdapterEx(Context context, ArrayList<Subject> data) {
-
         mContext = context;
+        handler = (OnClickEvent) context;
         mData = data;
         mDataShow = data;
         mLayoutInflater = LayoutInflater.from(mContext);
@@ -47,7 +48,7 @@ public class BaseAdapterEx extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View itemLayout = convertView;
         ViewHolder viewHolder = null;
 
@@ -76,11 +77,12 @@ public class BaseAdapterEx extends BaseAdapter {
 
             @Override
             public void onClick(View v) {
-                Button bt1 = new Button(mContext);
-                bt1.setText("Button 1");
-                FrameLayout.LayoutParams bt1LP = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT,FrameLayout.LayoutParams.WRAP_CONTENT);
-
-                root.addView(bt1,bt1LP);
+                handler.onClick(mData.get(position));
+//                Button bt1 = new Button(mContext);
+//                bt1.setText("Button 1");
+//                FrameLayout.LayoutParams bt1LP = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT,FrameLayout.LayoutParams.WRAP_CONTENT);
+//
+//                root.addView(bt1,bt1LP);
             }
         });
 
@@ -89,6 +91,10 @@ public class BaseAdapterEx extends BaseAdapter {
 
         return itemLayout;
 
+    }
+
+    interface OnClickEvent {
+        void onClick(Subject subject);
     }
 
 }
